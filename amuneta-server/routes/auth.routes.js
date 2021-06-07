@@ -75,6 +75,12 @@ router.post('/login', (req, res, next) => {
     req.logout();
     return res.status(200).json({ message: 'Log out success!'});
   })
+
+  router.get('/profile', (req, res, next) => {
+    User.findById({ _id: req.user.id })
+    .then(user => res.status(200).json(user))
+    .catch(error => res.status(500).json(error))
+  })
   
   router.put('/edit', (req, res, next) => {
     User.findOneAndUpdate({ _id: req.user.id }, { ...req.body}, { new: true })

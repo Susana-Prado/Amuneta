@@ -12,6 +12,18 @@ const productSchema = new Schema({
     required: true,
   },
   image: { type: String, required: true },
+  category: { type: String, required: true}
+},
+{
+  timestamps: true,
+  toJSON: {
+    transform: (doc, ret) => {
+      ret.id = doc._id;
+      delete ret._id;
+      delete ret.__v;
+      return ret;
+    },
+  },
 });
 
 const Product = mongoose.model('Product', productSchema);

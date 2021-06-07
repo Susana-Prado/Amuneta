@@ -26,8 +26,7 @@ require('./configs/passport.config')(app);
 
 
 //Routes
-const index = require('./routes/index');
-app.use('/', index);
+
 
 const productsRouter = require('./routes/products.routes');
 const authRouter = require('./routes/auth.routes');

@@ -165,8 +165,6 @@ Product model
 
 The url to your repository and to your deployed project
 
-[Client repository Link](https://github.com/screeeen/project-client)
-
-[Server repository Link](https://github.com/screeeen/project-server)
+[Repository Link](https://github.com/Susana-Prado/Amuneta)
 
 [Deployed App Link](http://heroku.com/)

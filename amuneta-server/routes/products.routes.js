@@ -66,11 +66,13 @@ router.get('/cart', (req, res, next) =>{
     .populate('currentCart.productId')
     console.log(product, products)
 
-    // if (user.currentCart.length !== 0){
-    //     user.currentCart.forEach((product) => {
-    //         product.productSubtotal =
-    //     })
-    // }
+    if (user.currentCart.length !== 0){
+        user.currentCart.forEach((product) => {
+            product.productSubtotal = Math.round(
+              product.quantity * product.productId
+            )
+        })
+    }
 })
 
 module.exports = router;

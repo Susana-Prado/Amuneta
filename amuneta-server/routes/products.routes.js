@@ -58,21 +58,29 @@ router.post('/product/:id', (req, res, next) => {
     .catch((error) => res.status(500).json(error));
 });
 
-router.get('/cart', (req, res, next) =>{
+router
+  .get('/cart', (req, res, next) => {
     let subtotal = 0;
     let products = 0;
 
-    const user = User.findById({ id: req.user.id })
-    .populate('currentCart.productId')
-    console.log(product, products)
+    const user = User.findById({ id: req.user.id }).populate(
+      'currentCart.productId'
+    );
+    console.log(product, products);
 
-    if (user.currentCart.length !== 0){
-        user.currentCart.forEach((product) => {
-            product.productSubtotal = Math.round(
-              product.quantity * product.productId
-            )
-        })
+    if (user.currentCart.length !== 0) {
+      user.currentCart.forEach((product) => {
+        product.productSubtotal = product.quantity * product.price;
+        subtotal += product.productSubtotal;
+        products += product.quantity;
+      });
+      user.total = subtotal + order.shipping;
+      user.display = true;
+    } else {
+      user.display = false;
     }
-})
+  })
+  .then((user) => res.status(200).json(user))
+  .catch((error) => res.status(500).json(error));
 
 module.exports = router;
